@@ -1,0 +1,570 @@
+﻿Quran to Synonym topics implementation notes:
+
+**BUG** Click ayah isn't working as before; also not changing to Quran slide. also if quran open, clicking ayah ref not changing dropdown value of suwar.
+**BUG** when next topic clicked, change content to loading image. else no indication.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+INCORRECT REFERENCE: b58 b61 
+NO ARABIC AYAH or mistakes: t21 no arabic; j28 no ayah numbers or arabic; r14 no arabic; SA2 incomplete? n28 no arabic; 
+
+FIXED words:::::::::::::::::::::
+All of PAA; All of GAAF, many KAF.
+tt6 to tt7: 2 topics messed over into tt6
+
+:::::::::::::::::::::::::::::::::
+NO SURAS::::::::::::::::::::::::
+b49: has compound ayahs like 56:15-16. Did the regex pick it up?? b53: 79:10-11 ; b55 56:30-31; b57: 19:27: (is the double colon still cause it to pickup correctly?; b59; b65 &nbsp7:111 did regex pick up?? b66 double colon; 
+p1: no suras
+All of t: no Ayahs/Suras!
+FIXED: tt1: missing URLs
+FIXED: th1, 2: no urls.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CONTENT or FORMATTING ISSUES:
+t12: formatting issues in ttile.
+t18: partial + formatting issues
+t19: formatting issues. too much to left.
+
+tt2: has urls of form .to in content
+
+th1, 2: no words.
+
+AA39 - missing!!
+AA49 - missing!! (xAA20 has extra words)
+AA23 - wrong extra word? 3araDa
+AA35- heading wrong? is it mataa or amnaa?
+
+B37: it shud be aDAA3a, not asnaa3a. also incomplete?? http://quransynonyms.com/content/b/b37.html
+b46: partial
+b47: couldnt translate
+b48: says waSad, or rasad.
+b60, 61: arabic messed up
+b62: incorrect ayah to correct
+b73: maqtaan or maqtan?
+
+
+Word look wrong:
+To fly, to make fly (AA20) قَدَّمَ-اَسْتَقْدَمَ -  سَبَقَ-اِسْتَبَقَ -  اَقْبَلَ-اِسْتَقْبَلَ words wrong!!
+To indicate (AA21) no words
+AA22: words for AA20??
+AA23: wrong words
+AA24 wrong
+AA25 wrong words
+AA26 wrong words
+AA27 wrng
+------
+AA41 Correct
+A22: no words?? QADIMA,ISTAQDAM,SABAQA,ISTABAQA,AQBALA,ISTAQBALA
+
+
+MINOR:
+AA43 in IDEntry says Hajada. shud be Jahada.
+AA48 ibil arabic in wordEn
+
+expert Nouman's trans?
+ A12: sky.
+ A25: Halumma. 
+ A28: Noise
+
+ 
+ .............................
+AA20 URANA URNA [To Make Fly , To Fly]
+Synonyms: To make fly ----AZRA(ZA-RA-WA),NASAFA, To fly-- TAAR,ISTATAR
+
+AA21 ISHARA KARNA [To Point]
+Synonyms: AASHARA(SH-WA-RA/SH-YA-RA),RAMZ,TAGHAMAZA,3ARRADA
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+<i class="icon-refresh"></i>
+<i class="icon-share-alt"></i>
+<i class="icon-fullscreen"></i>
+<i class="icon-book"></i>
+<i class="icon-share"></i>
+
+<i class="icon-tag"></i>
+<i class="icon-tags"></i>
+<i class="icon-bookmark"></i>
+<i class="icon-comment"></i>
+<i class="icon-globe"></i>
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+var stats = {};
+stats.done = $('.complete  a.true, .incomplete a.true').length;
+stats.partial = $('.complete  a.partial, .incomplete a.partial').length;
+stats.incomplete = $('.incomplete  a.false').length;
+stats.total = stats.done + stats.partial + stats.incomplete;
+stats.percent = (100* (1 - stats.incomplete/stats.total) ).toFixed();
+console.log( JSON.stringify( stats ) );
+	$('#done.bar').attr('style', "width: " + 100*stats.done/stats.total + '%');
+	$('#partial.bar').attr('style', "width: " + 100*stats.partial/stats.total + '%');
+	$('#notdone.bar').attr('style', "width: " + 100*stats.incomplete/stats.total + '%');
+	$('#percent.btn').html( stats.percent +'%' );
+	$('#partial.badge').html(stats.partial);
+	$('#notdone.badge').html(stats.incomplete);
+
+	
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+var $findme = $('.last'),
+    $msg = $('.first');
+
+    function Scrolled() {
+        var findmeOffset = $findme.offset(),
+            findmeTop = findmeOffset.top,
+            scrollTop = $(document).scrollTop(),
+            visibleBottom = window.innerHeight;
+
+        if (findmeTop < scrollTop + visibleBottom) {
+            $msg.text('findme is visible');
+        }
+        else {
+            $msg.text('findme is NOT visible');
+        }
+    }
+	
+	$(window).scroll(function() {
+        Scrolled();
+    });
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Maarif-ul-Qur'aan tafseer: http://archive.org/details/English-MaarifulQuran
+http://islamicstudies.info/maarif/surah67.htm
+
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-1#page/n17/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-2#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-3#page/n15/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-4#page/n21/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-5#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-6#page/n25/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-7#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-8#page/n9/mode/2up
+
+344 -> Sura Mujadalah
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-8#page/n343/mode/1up
+
+
+var MaarifulQuraan = {
+   _MAP: { //surahPageNoMap
+	2:   [1,  53,95], //vol #1. key is last sura in vol. vol# is object index. first sura is 1st array value.
+	4:   [3,  23,291], //v 2
+	7:   [5,  19,297,537], //v 3
+	11:  [8,  145,299,509,593], //v 4
+	18:  [12,  23,181,235,295,331,  453,569], //v 5
+	30:  [19,  29,75,175,241,297,  343,471,523,567,627,  681,717], //v 6
+	46:  [31,  25,65,85,259,321,  363,419,497,543,585,  627,669,709,743,767,  785], //v 7
+	114: [47,  30,63,113,149,171,  189,199,237,252,277,  304,344,366,410,435,  445,461,477,488,517,  529,544,564,574,585,  594,611,634,649,661,  672,680,692,703,713,  721,725,738,750,756,  761,772,778,792,799,  804,811,818,824,830,  843,849,855,858,863,  865,869,874,877,885,  889,892,898,904,906,  914,918,926] //from surah 47. v 8
+   },
+   _PG_OFFSET: [-1, 19,16,  -4,-6,  -5,-8,-10,  10,8,6,4,  -4,-7,-9,-12,-14,-16,-19,  -5,-7,-9,-12,-14,-17,-19,-21,-23,-26,-29,-31,  
+				-4,-6,-9,-11,-13, -16,-19,-22,-24,-27,  -30,-32,-34,-36,-39,  -42, //v7
+				//-1,-1, for all of v8
+				],
+
+   _URL: "http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-$VOL#page/n$PAGE/mode/1up",
+   _VOL: 1, _PAGE: 17, _MODE: 1, 
+   
+   lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
+     var url, pageNo, volNo=0, map, pageNo;
+	 map = _.find(MaarifulQuraan._MAP, function(value, key){ ++volNo; return key >= suraNo; })
+	 if( map ){
+		pageNo = map[ suraNo - map[0] + 1];
+		offset = suraNo >=47 ? -1 : MaarifulQuraan._PG_OFFSET[ volNo ]; pageNo += offset;
+		url = MaarifulQuraan._URL.replace(/\$VOL/, volNo).replace(/\$PAGE/, pageNo);
+	 }
+	 return url;
+   }
+}
+var i = _.range(1,115);
+_.each(i, function(val){ console.log( val + ' '+ MaarifulQuraan.lookupSura(val) ); });
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+var x=-1, AsbabAlNuzul = {
+   _MAP: //surahPageNoMap
+[-1, 1,1,30,48,65, 74,79,81,85,95, 95,97,97,x,99, 100,104,108,110,111, 111,112,113,114,121, x,x,123,124,125, 125,127,127,x,x, 132,x,133,133,x, 135,135,136,136,136, 137,x,137,138,143, x,x,143,144,x, 145,146,147,150,152, 154,154,155,157,157, 158,159,159,160,160, x,x,x,160,161, 161,x,x,x,161, 162,x,162,x,x, 162,x,x,x,x, x,163,163,x,x, 164,164,x,165,x, x,165,x,x,165, 166,166,166,166,167, 167,168,168,169],
+
+   _URL: "http://archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi#page/n$PAGE/mode/1up",
+   _PG_OFFSET: 15,
+   lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
+     var url, pageNo, pageLookup;
+     pageLookup = AsbabAlNuzul._MAP[ suraNo ];
+     if(pageLookup && pageLookup > 0){
+       pageNo = AsbabAlNuzul._PG_OFFSET + pageLookup;
+       url = AsbabAlNuzul._URL.replace(/\$PAGE/g, pageNo); 
+     }
+     return url;
+   }
+}
+var i = _.range(1,115);
+_.each(i, function(val){ console.log( val + ' '+ AsbabAlNuzul.lookupSura( val ) ); });
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Mutaradifaat
+http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n84
+
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-5#page/n286/mode/1up
+
+
+http://api.globalquran.com/page/16:30/quran-wordbyword
+http://api.globalquran.com/page/16:30/quran-simple
+http://api.globalquran.com/page/16:30/quran-simple|quran-wordbyword
+
+//get JSON data for passed in sura
+var fetchSura = function(sura, ayah){
+	var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-wordbyword", ref;
+	ref = (sura || 1) + ":" + (ayah || 1);
+	o = $.getJSON( dataUrl.replace(/\$REF/g, ref) );
+	o.then( function(){ 
+		console.log( arguments ); data = arguments[0]; 
+		var html = '', div; html = format(data);
+		div = $('#z'); if(div.length <= 0){ div = $('body').append('<div id=z/>');}
+		$(div).html( html );	
+	});
+}
+var format = function(data){ var html = '';
+	$.each( data.quran['quran-wordbyword'], function(key,val){
+		$.each(val.verse.split('$'), function(index, word){
+			$.each(word.split('|'), function(i, token){
+				if(i<2){ html += token +'    ';}
+			});
+			html += '         ';
+		});
+		html += '<BR/>'; 
+	});
+	return html;
+}
+
+//Find all topics in current sura:
+var findTopicsForSura = function(sura){
+	var regexp, ret;
+	regexp = new RegExp(" " + sura + "\\:");
+	ret = 
+	_.chain(topicsAyahsMap)
+	 .filter( function(val, key){
+	   return val.r && regexp.test( val.r ); 
+	  })
+	 .map(function(o){
+		 return o.t;
+	  })
+	 .value(); return ret;
+}
+
+var sura = 55;
+fetchSura( sura );
+findTopicsForSura( sura );
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+var lookup = function(letter){
+	var pgStart, pgCount, o, ret = {};
+	ret.l = letter;
+
+	o = _.where(SYNONYMS_INDEX, {l: letter}); //console.log( JSON.stringify(o) );
+	assert(o && o.length > 0, "lookup pgStart "+letter);
+	pgStart = o[0].pg;
+	ret.pg = parseInt( pgStart ); //console.log( letter + " pgStart " + pgStart );
+
+	pgCount = _.reduce(pageOffsets[ letter ], function(a,b){return (a||0) + (b||0); }, 0);
+	assert(pgCount && pgCount > 0, "lookup pgCount "+letter);
+	ret.pgEnd = ret.pg + pgCount;
+	ret.pgCount = ++pgCount;
+	return ret;
+}
+
+var _log = function(o){
+	console.log( JSON.stringify(o) + "\n\n" );
+}
+
+var assert = function(pred, prefix){ 
+	prefix = prefix || "";
+	if(!pred){
+		console.log(prefix +" Assert failed! ***********"); //debugger;
+	}
+}
+
+var findApproxPageNo = function(id, offset){
+	var pageno, _html='', page_offset=0; if(!offset) offset = 0;
+	var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
+	var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
+	if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
+		pageno = parseInt(sectionAlphabetObj.pg); 
+		_html = '<div class="alert alert-error"><B>Showing first page of section for this topic. Use page navigation buttons below to find topic.</B></div>' 
+	}
+	else{ _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>'; }
+	try{
+		if(pageOffsets[sectionAlphabet] && pageOffsets[sectionAlphabet].length >= sectionNumber ){ 
+			page_offset = _.reduce(pageOffsets[sectionAlphabet].slice(0, sectionNumber), function(memo, num){ return memo + num; }, 0); //parseInt( pageOffsets[sectionAlphabet][sectionNumber-1] );
+			_html = '';
+		}
+	}catch(e){debugger;}
+	return {id: id,
+			pg: pageno + offset + page_offset, 
+			pgEnd: pageno + offset + page_offset + (pageOffsets[sectionAlphabet][sectionNumber] || 0), 
+			l: (pageOffsets[sectionAlphabet][sectionNumber] || 0),
+			html: _html};
+}
+
+var letter, letters;
+letters = _.map( SYNONYMS_INDEX, function(o){ return o.l; });
+$.each(letters, function(index, letter){
+	_log( lookup(letter) );
+});
+_log( findApproxPageNo("p30") ); //shud be 298
+
+
+
+
+
+
+
+
+
+
+var d = "\
+p 6-19 47-59\n\
+t 1 15 21\n\
+";
+var regexp = /(\d+)\-(\d+)/g;
+d.match(/(\d+)\-(\d+)/g);
+
+var d = "\
+p 6-19 47-59\n\
+t 1 15 21\n\
+";
+
+
+var pageStatus = {}, letterStatus = {
+	'A': "1-29",
+	'AA': "1-51",
+	'b': "1-37 46-80",
+	'p': "2 6-19 47-59",
+	't': "1 15 21",
+	'tt': "3 4",
+	'th': "",
+	'j': "4 28",
+	'ch': "22-26",
+	'HA': "",
+	'kh': "19-21",
+	'd': "1-3 16-24 30",
+	'dd': "3-9",
+	'dh': "1-6",
+	'r': "1-6 14-21",
+	'z': "1-5",
+	's': "3-27",
+	'sh': "",
+	'SA': "",
+	'DA': "",
+	'TA': "",
+	'ZA': "1 2",
+	'E': "1-6",
+	'gh': "",
+	'f': "2-14",
+	'q': "1-18",
+	'k': "1-19 34 35 39-45",
+	'gg': "1-27",
+	'l': "1-4 7 13",
+	'm': "18 33 34",
+	'n': "14 28",
+	'w': "1 2",
+	'h': "4 17",
+	'y': "" /*,
+	'appendix1': [905,9,1,1,1, 1,3,4,3,1, 2,4,2,1,1],
+	'appendix2': [940,3,3,9,7, 1,1,1],
+	'appendix3': [966,6,6,4],
+	'appendix4': [983,7],
+	'appendix5': [991,3,2,1,2, 2,3,3,1,]*/
+}
+
+var o = {"A":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"AA":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51],"b":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80],"p":[2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,47,48,49,50,51,52,53,54,55,56,57,58,59],"t":[1,15,21],"tt":[3,4],"th":[],"j":[4,28],"ch":[22,23,24,25,26],"HA":[],"kh":[19,20,21],"d":[1,2,3,16,17,18,19,20,21,22,23,24,30],"dd":[3,4,5,6,7,8,9],"dh":[1,2,3,4,5,6],"r":[1,2,3,4,5,6,14,15,16,17,18,19,20,21],"z":[1,2,3,4,5],"s":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],"sh":[],"SA":[],"DA":[],"TA":[],"ZA":[1,2],"E":[1,2,3,4,5,6],"gh":[],"f":[2,3,4,5,6,7,8,9,10,11,12,13,14],"q":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"k":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,34,35,39,40,41,42,43,44,45],"gg":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],"l":[1,2,3,4,7,13],"m":[18,33,34],"n":[14,28],"w":[1,2],"h":[4,17],"y":[]}
+
+
+{"A":"67-105 ","AA":"106-166 ","b":"167-212 220-259 ","p":"261-265 269-287 320-335 ","t":"336-337 347-347 352-354 ","tt":"370-371 371-372 ","j":"381-382 407-407 ","ch":"431-438 ","kh":"471-472 ","d":"473-476 490-501 505-507 ","dd":"518-526 ","dh":"527-532 ","r":"533-540 546-555 ","z":"556-564 ","s":"571-601 ","ZA":"631-633 633-633 ","E":"634-639 ","f":"659-670 ","q":"671-688 ","k":"689-706 717-718 718-719 721-689 ","gg":"726-756 ","l":"757-761 762-764 768-771 ","m":"797-799 816-818 818-819 ","n":"845-847 862-864 ","w":"871-873 873-874 ","h":"881-883 900-901 "}
+
+var o = {}, oo = {}, pageStatus = {}, regexp = /(\d+)\-(\d+)/;
+$.each( letterStatus, function(l, data){
+	var arr = [], arrPg = [], pgPrevious, pgLast, oPgLookup, oPgEndLookup, oPgLetterLookup, nDataParts, pgLetterFirst, pgLetterLast;
+	if(l){ 
+		oPgLetterLookup = lookup( l );
+		pgLetterFirst = oPgLetterLookup.pg; pgLetterLast = oPgLetterLookup.pgEnd;
+		nDataParts = data.split(' ') && data.split(' ').length; 
+	}
+	$.each( data.split(' '), function(i, d){
+		var isPgRange, start, end, pgStart, pgEnd;
+		isPgRange = regexp.test(d);
+		if(d && !isPgRange && parseInt(d)){
+			start = end = parseInt(d);
+			oPgLookup = oPgEndLookup = findApproxPageNo(l + d);
+		}else if(d && isPgRange){
+			var matches = d.match( regexp );
+			if(matches && (start=parseInt(matches[1])) && (end=parseInt(matches[2])) ){
+				oPgLookup = findApproxPageNo(l + start);
+				oPgEndLookup = findApproxPageNo(l + end);
+			}
+		}else if(!d){ //this processes empty letters.
+			pageStatus[l] = "(" + pgLetterFirst + "-" + pgLetterLast + ")";
+			return;
+		}
+		pgStart = oPgLookup.pg; pgEnd = oPgEndLookup.pgEnd;
+		_log( {l: l, d: d, start: start, end: end, pgStart: pgStart, pgEnd: pgEnd} );
+		arr = arr.concat( _.range(start, end+1) ); //push all the topic indexes.
+		arrPg = arrPg.concat( _.range(pgStart, pgEnd) );
+		pageStatus[l] = (pageStatus[l] || "");
+		
+		//At beginning: any missed pages?
+		if(i == 0 && pgLetterFirst < pgStart){
+			pageStatus[l] += "(" + pgLetterFirst + "-" + (-1+pgStart) + ") ";
+		}
+		//in middle: any missed pages?
+		if( pgPrevious && pgPrevious < pgStart ){ //append missing pages, in brackets
+			pageStatus[l] += "(" + (1+pgPrevious) + "-" + (-1+pgStart) + ") ";
+		}
+		pageStatus[l] += pgStart + "-" + pgEnd;
+		//in end: any missed pages?
+		if(i >= (-1+nDataParts)){
+			if(pgLetterLast > pgEnd)
+				pageStatus[l] += " (" + (1+pgEnd) + "-" + pgLetterLast + ")";
+		}else{ pageStatus[l] += " "; }
+		//All done. store last page processed in this iteration.
+		pgPrevious = pgEnd;			
+        o[l] = arr;
+        oo[l] = arrPg;
+	});
+});
+_log( o );_log( oo );_log( pageStatus );
+
+
+
+
+
+{
+    "A": "67-105 ",
+    "AA": "106-166 ",
+    "b": "167-212 220-259 ",
+    "p": "261-265 269-287 320-335 ",
+    "t": "336-337 347-347 352-354 ",
+    "tt": "370-371 371-372 ",
+    "j": "381-382 407-407 ",
+    "ch": "431-438 ",
+    "kh": "471-472 ",
+    "d": "473-476 490-501 505-507 ",
+    "dd": "518-526 ",
+    "dh": "527-532 ",
+    "r": "533-540 546-555 ",
+    "z": "556-564 ",
+    "s": "571-601 ",
+    "ZA": "631-633 633-633 ",
+    "E": "634-639 ",
+    "f": "659-670 ",
+    "q": "671-688 ",
+    "k": "689-706 717-718 718-719 721-689 ",
+    "gg": "726-756 ",
+    "l": "757-761 762-764 768-771 ",
+    "m": "797-799 816-818 818-819 ",
+    "n": "845-847 862-864 ",
+    "w": "871-873 873-874 ",
+    "h": "881-883 900-901 "
+}
+
+
+{
+    "A": "67-105",
+    "AA": "106-166",
+    "b": "167-212 (213-219) 220-259",
+    "p": "(260-260) 261-265 (266-268) 269-287 (288-319) 320-335",
+    "t": "336-337 (338-346) 347-347 (348-351) 352-354 (355-366)",
+    "tt": "(367-369) 370-371 371-372 (373-376)",
+    "th": "(377-378)",
+    "j": "(379-380) 381-382 (383-406) 407-407",
+    "ch": "(408-430) 431-438 (439-440)",
+    "HA": "(441-453)",
+    "kh": "(454-470) 471-472",
+    "d": "473-476 (477-489) 490-501 (502-504) 505-507 (508-515)",
+    "dd": "(516-517) 518-526",
+    "dh": "527-532",
+    "r": "533-540 (541-545) 546-555",
+    "z": "556-564 (565-569)",
+    "s": "(570-570) 571-601 (602-603)",
+    "sh": "(604-616)",
+    "SA": "(617-620)",
+    "DA": "(621-621)",
+    "TA": "(622-630)",
+    "ZA": "631-633 633-633",
+    "E": "634-639 (640-647)",
+    "gh": "(648-657)",
+    "f": "(658-658) 659-670",
+    "q": "671-688",
+    "k": "689-706 (707-716) 717-718 718-719 (720-720) 721-689 (690-725)",
+    "gg": "726-756",
+    "l": "757-761 (762-761) 762-764 (765-767) 768-771 (772-774)",
+    "m": "(775-796) 797-799 (800-815) 816-818 818-819 (820-833)",
+    "n": "(834-844) 845-847 (848-861) 862-864 (865-870)",
+    "w": "871-873 873-874 (875-877)",
+    "h": "(878-880) 881-883 (884-899) 900-901",
+    "y": "(902-904)"
+}
+
+
+
+Incomplete Pages List
+
+ 213-219 
+ 260
+ 266-268
+ 288-319 
+ 338-346 
+ 348-351 
+ 355-369
+ 377-380 383-406 408-430 439-470(IKY)
+  477-489 
+ 502-504 ,
+ 508-517
+ 541-545,
+ 565-570,
+ 602-630,
+ 640-658
+ 707-716,
+ 720.
+ 765-767 
+ 772-796 
+ 800-815 
+ 820-844 
+ 848-861 
+ 865-870 
+ 875-880 
+ 884-899,
+ 902-904
+ 
+ ==============================
+ var findPage = function(pageToFind){
+  var match = -2, oLetterLookup, offsets, letter, index; 
+  _.find(SYNONYMS_INDEX, function(o, key, list){
+      ++match; return parseInt(o.pg) > pageToFind; 
+    }, match); 
+  if(match < 0){ return; } //invalid?
+  oLetterLookup = SYNONYMS_INDEX[match];
+  letter = oLetterLookup.l;
+
+  console.log( JSON.stringify(oLetterLookup) );
+  index = 1;
+  for(; (findApproxPageNo(letter + index) ).pg <= pageToFind; ++index){
+
+  }
+  console.log( letter + (index-1) );
+}
+findPage(637);
