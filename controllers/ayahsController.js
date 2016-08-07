@@ -23,7 +23,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	});
 	
 	$rootScope.fetchSura = function(ref){
-		var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-simple|en.sahih";
+		var data, o, dataUrl = "//api.globalquran.com/page/$REF/quran-simple|en.sahih";
 		var _url = dataUrl.replace(/\$REF/g, ref ) + "?jsoncallback=?"; //http://api.globalquran.com/all/page/604/quran-simple?jsoncallback=?
 		$http.defaults.headers.common = {}; //get[	"Access-Control-Request-Headers"] = "accept, origin";
 		$http.get(_url).success(function(data) { 
@@ -138,7 +138,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 	var _url_previous;
 	$rootScope.getUrduBookUrl = function(fullScreen){
-		var url, _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; 
+		var url, _url = "//archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; 
 		var o = findApproxPageNo( id );
 		if(o && o.pg){
 			pg = o.pg; $rootScope.page = pg; url = _url + (17 + pg); console.log('getUrduBookUrl: '+ url);
@@ -205,7 +205,7 @@ var scrollToAyah = function(ref){ if(ref == '1:1') return;
 
 //get JSON data for passed in sura
 fetchSura = function(sura, ayah, $rootScope){
-	var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-wordbyword", ref;
+	var data, o, dataUrl = "//api.globalquran.com/page/$REF/quran-wordbyword", ref;
 	ref = (sura || 1) + ":" + (ayah || 1);
 	o = $.getJSON( dataUrl.replace(/\$REF/g, ref) );
 	o.then( function(){//console.log( arguments ); 
@@ -446,7 +446,7 @@ AsbabAlNuzul = {
    _MAP: //surahPageNoMap
 [-1, 1,1,30,48,65, 74,79,81,85,95, 95,97,97,x,99, 100,104,108,110,111, 111,112,113,114,121, x,x,123,124,125, 125,127,127,x,x, 132,x,133,133,x, 135,135,136,136,136, 137,x,137,138,143, x,x,143,144,x, 145,146,147,150,152, 154,154,155,157,157, 158,159,159,160,160, x,x,x,160,161, 161,x,x,x,161, 162,x,162,x,x, 162,x,x,x,x, x,163,163,x,x, 164,164,x,165,x, x,165,x,x,165, 166,166,166,166,167, 167,168,168,169],
 
-   _URL: "http://archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi?ui=embed#page/n$PAGE/mode/1up",
+   _URL: "//archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi?ui=embed#page/n$PAGE/mode/1up",
    _PG_OFFSET: 15,
    lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
      var url, pageNo, pageLookup;
@@ -476,8 +476,8 @@ MaarifulQuraan = {
 				//-1,-1, for all of v8
 				],
 
-   _URL: "http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-$VOL?ui=embed#page/n$PAGE/mode/1up",
-   _URL2: "http://islamicstudies.info/maarif/surah$SURA.htm",
+   _URL: "//archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-$VOL?ui=embed#page/n$PAGE/mode/1up",
+   _URL2: "//islamicstudies.info/maarif/surah$SURA.htm",
    _VOL: 1, _PAGE: 17, _MODE: 1, 
    
    lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
@@ -503,7 +503,7 @@ MoharAliWordByWordQuraan = {
 					14,14,16,14,14, 14,14,14,14,14, 14,14,14,14,14, 15,15,16,16,16, 17,16,16,16,
 					13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 14,14,14,14,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13
 				],
-   _URL: "http://archive.org/stream/$VOL?ui=embed#page/n$PAGE/mode/1up",   
+   _URL: "//archive.org/stream/$VOL?ui=embed#page/n$PAGE/mode/1up",   
    lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
      var url, pageNo, volNo=0, map, pageNo;
 	 map = _.find(MoharAliWordByWordQuraan._MAP, function(value, key){ ++volNo; return key >= suraNo; })
