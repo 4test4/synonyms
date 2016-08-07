@@ -441,16 +441,19 @@ getNextID = function(id, prev){
   }
 }
 
-var x=-1;
+var x=-1,
 AsbabAlNuzul = {
    _MAP: //surahPageNoMap
 [-1, 1,1,30,48,65, 74,79,81,85,95, 95,97,97,x,99, 100,104,108,110,111, 111,112,113,114,121, x,x,123,124,125, 125,127,127,x,x, 132,x,133,133,x, 135,135,136,136,136, 137,x,137,138,143, x,x,143,144,x, 145,146,147,150,152, 154,154,155,157,157, 158,159,159,160,160, x,x,x,160,161, 161,x,x,x,161, 162,x,162,x,x, 162,x,x,x,x, x,163,163,x,x, 164,164,x,165,x, x,165,x,x,165, 166,166,166,166,167, 167,168,168,169],
 
-   _URL: "//archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi?ui=embed#page/n$PAGE/mode/1up",
-   _PG_OFFSET: 15,
+   _URLold: "//archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi?ui=embed#page/n$PAGE/mode/1up",
+   _URL: "//archive.org/stream/merged_document_2_201501/merged_document_2?ui=embed#page/n$PAGE/mode/1up",
+   _PG_OFFSET: 16,
    lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
      var url, pageNo, pageLookup;
      pageLookup = AsbabAlNuzul._MAP[ suraNo ];
+	 var ii = 1;
+	 while(pageLookup < 0){ pageLookup = AsbabAlNuzul._MAP[ suraNo + ii++ ];}
      if(pageLookup && pageLookup > 0){
        pageNo = AsbabAlNuzul._PG_OFFSET + pageLookup;
        url = AsbabAlNuzul._URL.replace(/\$PAGE/g, pageNo); 
