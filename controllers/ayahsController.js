@@ -189,6 +189,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.MaarifulQuraan = MaarifulQuraan; $rootScope.AsbabAlNuzul = AsbabAlNuzul; $rootScope.MoharAliWordByWordQuraan = MoharAliWordByWordQuraan; $rootScope.book1 = $rootScope.book2 = $rootScope.book3 = true;
 	$(function() {
 		$('.carousel').each(function(){
+			if( $(this).carousel ) ///this next line was throwing exception
             $(this).carousel({
                 interval: false
             });

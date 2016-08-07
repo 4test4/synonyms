@@ -68,6 +68,7 @@
 
 
 <body>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<div class="container-fluid">
 	  <div class="row-fluid">	
 		<div class="span12 span-fixed-sidebar stagearea">
@@ -169,10 +170,22 @@
 			<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
 		  </div>
 
-		  <div id="myCarousel" class=" carousel slide clearfix">
+		  
+		  <div id="myCarousel" class=" carousel slide clearfix" data-ride="carousel">
+		    <!-- Indicators -->
+		    <ol class="carousel-indicators">
+			  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			  <li data-target="#myCarousel" data-slide-to="1"></li>
+			  <li data-target="#myCarousel" data-slide-to="2"></li>
+			  <li data-target="#myCarousel" data-slide-to="3"></li>
+			  <li data-target="#myCarousel" data-slide-to="4"></li>
+			  <li data-target="#myCarousel" data-slide-to="5"></li>
+		    </ol>
+
 			<!-- Carousel items -->
-			<div class="carousel-inner stagearea">
+			<div class="carousel-inner stagearea" role="listbox">
 				<div class="active item">
+					<!-- <div class="carousel-caption">AAAAA</div> -->
 					<div class=well well-small>
 					<H4>Book view (Mutaradifaat al-Qur'aan - urdu):</H4>
 					<div class=pull-right>
@@ -182,12 +195,12 @@
 					ng-src="{{getUrduBookUrl()}}"></IFRAME>
 					</div>
 				</div>
-				<div class="item">
+				<!-- <div class="item">
 					<div class=well well-small>
 					<H4>Quran view:</H4>
 					<div ng-include src="'partials/quran-template.html'"></div>
 					</div>
-				</div>
+				</div> -->
 				<div class="item">
 					<div class=well well-small>
 					<H4>Quran view (Tafseer Maariful Qur'aan):</H4>
@@ -214,7 +227,7 @@
 					<span ng-show="!book3" id="book3"></span>					
 					</div>
 				</div>
-				<div class="item">
+<!-- 				<div class="item">
 					<div class=well well-small>
 					<H4>Quran view (Asbab Al Nuzul):</H4>
 					<div class=pull-right>
@@ -228,22 +241,30 @@
 					
 					</div>
 				</div>
+ -->
 				<div class="item">
 					<div ng-include src="'partials/topics.html'"></div>
 				</div>
 				<div class="item">
 					<div ng-include src="'partials/words.html'"></div>
 				</div>
-				<div class="item">
+<!-- 				<div class="item">
 					<div ng-include src="'partials/pics.html'"></div>
 				</div>
 				<div class="item">
 					<div ng-include src="'partials/statusnew.html'"></div>
 				</div>
+-->
 			</div>
-			<!-- Carousel nav -->
-			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			<!-- Controls -->
+		    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+		    </a>
 		  </div>
 		  
 	    <HR/><BR><div id="disqus_thread"></div>
@@ -295,18 +316,23 @@
 
 	<!-- Le javascript
     ================================================== -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script> -->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 <!--  <script src="lib/angular/angular.min.js"></script> -->
   <script src="js/app.js"></script>
 <!--  <script src="js/mapper.js"></script>-->
-  <script src="js/jquery-1.8.2.min.js"></script>
-  <script src="js/underscore-min.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<!--   <script src="js/jquery-1.8.2.min.js"></script> -->
+<!-- <script src="//jashkenas.github.io/underscore/underscore-min.js"></script>-->
+ <script src="js/underscore-min.js"></script>
 <!--  <script src="js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="controllers/ayahsController.js?0.8"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+<!-- <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
-  <script type="text/javascript">
+ -->  <script type="text/javascript">
 	$(document).ready(function() {
 	   if ($.browser.msie) {
 		 alert('Internet Explorer browser is not fully supported. Please retry in Chrome or Firefox, if you have issues. We apologize for the inconvenience. \n\nAnother option, if you wish to stick to Internet Explorer, is to click OK & activate Google Frame on next screen.');
@@ -365,12 +391,12 @@
     <script>
      // The conditional ensures that this code will only execute in IE,
      // Therefore we can use the IE-specific attachEvent without worry
-     window.attachEvent("onload", function() {
-       CFInstall.check({
-         mode: "inline", // the default
-         node: "prompt"
-       });
-     });
+     //window.attachEvent("onload", function() {
+     //  CFInstall.check({
+     //    mode: "inline", // the default
+     //    node: "prompt"
+     //  });
+     //});
     </script>
   <![endif]-->
 </body>
